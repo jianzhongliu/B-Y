@@ -1,4 +1,4 @@
-package br.com.restful.resource;
+package com.by.resource;
 
 import java.sql.SQLException;
 
@@ -9,16 +9,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
-import br.com.restful.dao.TouristDAO;
-import br.com.restful.model.Tourist;
+import com.by.dao.TouristDAO;
+import com.by.model.Tourist;
+
 
 /**
  * 
- * Classe respons�vel por conter os metodos REST de acesso ao webservice
+ * @author liujianzhong
  *
- * @author Douglas Costa <douglas.cst90@gmail.com>
- * @since 17/02/2013 02:05:23
- * @version 1.0
  */
 @Path("/touristDetail")
 public class ClienteResource {
@@ -56,20 +54,8 @@ public class ClienteResource {
 
 /**
  * 
- * @return
- * @throws InstantiationException
- * @throws IllegalAccessException
- * @throws ClassNotFoundException
- * @throws SQLException
  */
-//	@GET
-////	@Path("/get12306ValueByKey")
-//	@Path(value="/get12306ValueByKey/{key}")
-//	@Produces("application/json")
-//	public String get12306ValueByKey(@PathParam("key") String key) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-//		String pp = new ClienteController().get12306KeyValue(key);
-//		return pp;
-//	}
+
 
 	 
 }

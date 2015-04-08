@@ -1,4 +1,4 @@
-package br.com.restful.model;
+package com.by.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

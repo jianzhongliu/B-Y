@@ -1,4 +1,4 @@
-package br.com.restful.factory;
+package com.by.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

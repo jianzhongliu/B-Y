@@ -1,18 +1,23 @@
-package br.com.restful.dao;
+package com.by.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.com.restful.factory.ConnectionFactory;
-import br.com.restful.model.Tourist;
+import com.by.factory.ConnectionFactory;
+import com.by.model.Tourist;
 
+/**
+ * 
+ * @author liujianzhong
+ *
+ */
 public class TouristDAO extends ConnectionFactory{
 	
-	/***
+	/**
 	 * 
-	 * @param anser
+	 * @param tourist
 	 */
 	public void insertAnserObject(Tourist tourist) {
 		Connection connect = null;
