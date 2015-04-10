@@ -238,10 +238,9 @@ public class Tourist {
 	public void setRegisterdate(int registerdate) {
 		this.registerdate = registerdate;
 	}
-
 	@Override
 	public String toString() {
-		return "[identify=" + "" + "]";
+		return "[identify=" + identify + "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "]";
 	}
 
 }

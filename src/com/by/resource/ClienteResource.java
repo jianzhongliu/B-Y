@@ -1,6 +1,7 @@
 package com.by.resource;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,8 +10,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
+import net.sf.json.JSONArray;
+
 import com.by.dao.TouristDAO;
 import com.by.model.Tourist;
+import com.by.response.ResponseObject;
+import com.google.gson.JsonObject;
 
 
 /**
@@ -18,7 +23,7 @@ import com.by.model.Tourist;
  * @author liujianzhong
  *
  */
-@Path("/touristDetail")
+@Path("/tourist")
 public class ClienteResource {
 	@Context
 	UriInfo uriInfo;
@@ -39,17 +44,21 @@ public class ClienteResource {
 	 * @throws SQLException 
 	 */
 	@GET
-	@Path("/register")
+	@Path("/getAllTourist")
 	@Produces("application/json")
-	public String listarTodos() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		Tourist tourist = new Tourist();
-		tourist.setIdentify("skdfskjdfklsdjfklsd");
-		tourist.setUsername("gange");
-		tourist.setPassword("Aa123456");
+	public ResponseObject listarTodos() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+//		Tourist tourist = new Tourist();
+//		tourist.setIdentify("skdfskjdfklsdjfklsd");
+//		tourist.setUsername("gange");
+//		tourist.setPassword("Aa123456");
 		TouristDAO touristDao = new TouristDAO();
-		touristDao.insertAnserObject(tourist);
+	ArrayList<Tourist> touristList = touristDao.getAllTourist();
+	ResponseObject  response = new ResponseObject();
+	JsonObject object = new JsonObject();
+	System.out.println(response);
 //		ArrayList<Tourist> pp = new ClienteController().listarTodos();
-		return "OK";
+//		JsonArray 
+		return response;
 	}
 
 /**

@@ -3,7 +3,7 @@ package com.by.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class scenery_sopt {
+public class Scenery_sopt {
 	private	Integer identify;
 	private	String senaryname;
 	private	Integer cityid;

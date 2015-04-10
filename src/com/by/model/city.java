@@ -3,7 +3,7 @@ package com.by.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class city {
+public class City {
 	private	Integer identify;
 	private	String cityname;
 

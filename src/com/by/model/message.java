@@ -3,7 +3,7 @@ package com.by.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class message {
+public class Message {
 	private	Integer identify;
 	private	String userid;
 	private	String touristid;
@@ -11,7 +11,7 @@ public class message {
 	private	String replycontent;
 	private	Integer commentdate;
 	private	Integer replaydate;
-
+	private String phonenumber;
 	
 	public Integer getIdentify() {
 		return identify;
@@ -80,6 +80,16 @@ public class message {
 
 	public void setReplaydate(Integer replaydate) {
 		this.replaydate = replaydate;
+	}
+
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 

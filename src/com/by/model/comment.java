@@ -3,16 +3,17 @@ package com.by.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class comment {
+public class Comment {
 	private	Integer identify;
 	private	String userid;
 	private	String touristid;
+	private Integer score;
 	private	String content;
 	private	String replycontent;
 	private	Integer commentdate;
-	private	Integer replaydate;
+	private	Integer replydate;
 	
-	
+
 	public Integer getIdentify() {
 		return identify;
 	}
@@ -40,6 +41,16 @@ public class comment {
 
 	public void setTouristid(String touristid) {
 		this.touristid = touristid;
+	}
+
+
+	public Integer getScore() {
+		return score;
+	}
+
+
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 
 
@@ -73,13 +84,13 @@ public class comment {
 	}
 
 
-	public Integer getReplaydate() {
-		return replaydate;
+	public Integer getReplydate() {
+		return replydate;
 	}
 
 
-	public void setReplaydate(Integer replaydate) {
-		this.replaydate = replaydate;
+	public void setReplydate(Integer replydate) {
+		this.replydate = replydate;
 	}
 
 
