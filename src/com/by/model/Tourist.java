@@ -30,6 +30,8 @@ public class Tourist {
 	private	String otherinfoid;
 	private	int ordernumber;
 	private	int registerdate;
+	private int commentnumber;
+	private int messagenumber;
 	
 	public String getIdentify() {
 		return identify;
@@ -238,9 +240,27 @@ public class Tourist {
 	public void setRegisterdate(int registerdate) {
 		this.registerdate = registerdate;
 	}
+	
+	
+	public int getCommentnumber() {
+		return commentnumber;
+	}
+
+	public void setCommentnumber(int commentnumber) {
+		this.commentnumber = commentnumber;
+	}
+
+	public int getMessagenumber() {
+		return messagenumber;
+	}
+
+	public void setMessagenumber(int messagenumber) {
+		this.messagenumber = messagenumber;
+	}
+
 	@Override
 	public String toString() {
-		return "[identify=" + identify + "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "username=" +username+ "]";
+		return "[identify=" + identify + "username=" +username+  "]";
 	}
 
 }

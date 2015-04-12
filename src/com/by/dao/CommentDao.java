@@ -27,7 +27,7 @@ comment.setReplydate(20151021);
 comment.setReplycontent("那就不回复了");
 CommentDao commentDao = new CommentDao();
 //commentDao.updateCommentByTourist(comment);
-//System.out.println(commentDao.getAllCommentByUserId("123"));
+System.out.println(commentDao.getAllCommentByUserId("123"));
 //System.out.println(commentDao.getAllTouristByTouristId("13333"));
 	}
 	/**

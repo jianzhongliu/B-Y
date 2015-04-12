@@ -14,7 +14,7 @@ import net.sf.json.JSONArray;
 
 import com.by.dao.TouristDAO;
 import com.by.model.Tourist;
-import com.by.response.ResponseObject;
+import com.by.response.ScenaryResponseObject;
 import com.google.gson.JsonObject;
 
 
@@ -46,14 +46,14 @@ public class ClienteResource {
 	@GET
 	@Path("/getAllTourist")
 	@Produces("application/json")
-	public ResponseObject listarTodos() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public ScenaryResponseObject listarTodos() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 //		Tourist tourist = new Tourist();
 //		tourist.setIdentify("skdfskjdfklsdjfklsd");
 //		tourist.setUsername("gange");
 //		tourist.setPassword("Aa123456");
 		TouristDAO touristDao = new TouristDAO();
 	ArrayList<Tourist> touristList = touristDao.getAllTourist();
-	ResponseObject  response = new ResponseObject();
+	ScenaryResponseObject  response = new ScenaryResponseObject();
 	JsonObject object = new JsonObject();
 	System.out.println(response);
 //		ArrayList<Tourist> pp = new ClienteController().listarTodos();

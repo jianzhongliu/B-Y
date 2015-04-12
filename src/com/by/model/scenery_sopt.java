@@ -118,7 +118,7 @@ public class Scenery_sopt {
 
 	@Override
 	public String toString() {
-		return "[identify=" + "" + "]";
+		return "[identify=" + "" + "senaryname"+senaryname+"]";
 	}
 
 }

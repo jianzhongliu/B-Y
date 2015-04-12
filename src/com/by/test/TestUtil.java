@@ -7,7 +7,7 @@ import net.sf.json.JSONArray;
 import com.by.dao.TouristDAO;
 import com.by.model.Tourist;
 import com.by.resource.ClienteResource;
-import com.by.response.ResponseObject;
+import com.by.response.ScenaryResponseObject;
 
 public class TestUtil {
 
@@ -27,7 +27,7 @@ public void getAllTourist() {
 	
 	TouristDAO touristDao = new TouristDAO();
 	ArrayList<Tourist> touristList = touristDao.getAllTourist();
-	ResponseObject  response = new ResponseObject();
+	ScenaryResponseObject  response = new ScenaryResponseObject();
 //	response.setDataArray(touristList.toString());
 	System.out.println("===result==="+touristList);
 }

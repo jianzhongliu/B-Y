@@ -1,19 +1,18 @@
 package com.by.response;
 
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.google.gson.JsonObject;
-
-import net.sf.json.JSONArray;
+import com.by.model.Scenery_sopt;
 
 @XmlRootElement
-public class ResponseObject {
+public class ScenaryResponseObject {
 	private String status;
 	private StringBuffer errorMSG;
 	private int errorCode;//错误码
-	private JsonObject dataArray;
-	
+	private ArrayList<Scenery_sopt> dataArray;
 
 	public String getStatus() {
 		return status;
@@ -44,19 +43,13 @@ public class ResponseObject {
 		this.errorCode = errorCode;
 	}
 
-
-
-
-
-	public JsonObject getDataArray() {
+	public ArrayList<Scenery_sopt> getDataArray() {
 		return dataArray;
 	}
 
-
-	public void setDataArray(JsonObject dataArray) {
+	public void setDataArray(ArrayList<Scenery_sopt> dataArray) {
 		this.dataArray = dataArray;
 	}
-
 
 	@Override
 	public String toString() {

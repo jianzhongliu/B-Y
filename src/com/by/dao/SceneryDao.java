@@ -6,38 +6,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.by.model.Message;
+import com.by.factory.ConnectionFactory;
+import com.by.model.Scenery_sopt;
 
-public class SceneryDao {
+public class SceneryDao extends ConnectionFactory{
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+SceneryDao sceneryDao = new SceneryDao();
+//System.out.println(sceneryDao.getHotScenneryWithNumber(3));
+	System.out.println(sceneryDao.getAllScenneryBySceneryName("东极岛"));
 	}
 	/**
-	 * 新增评论
+	 * 新增旅游景点
 	 * @param tourist
 	 */
-	public boolean insertMessageObject(Message message) {
+	public boolean insertMessageObject(Scenery_sopt scenery_sopt) {
+//	 senaryname  cityid cityname imageurl ordernumber touristnumber scenerynumber score  date
 		Boolean status = true;
 		Connection connect = null;
-		String sql = "INSERT INTO scenery_spot(identify,userid, touristid, content,commentdate,phonenumber) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO scenery_spot(identify,senaryname,cityid,cityname,imageurl,ordernumber,touristnumber,scenerynumber,score,date) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		System.out.print(sql);
 		connect = createConnect();
 		ResultSet rs = null;
 		try {				
 				pstmt =	connect.prepareStatement(sql);
-				pstmt.setInt(1, message.getIdentify());
-				pstmt.setString(2, message.getUserid());
-				pstmt.setString(3, message.getTouristid());
-				pstmt.setString(4, message.getContent());
-				pstmt.setInt(5, message.getCommentdate());
-				pstmt.setString(6, message.getPhonenumber());
-//				pstmt.executeBatch();
+				pstmt.setInt(1, scenery_sopt.getIdentify());
+				pstmt.setString(2, scenery_sopt.getSenaryname());
+				pstmt.setInt(3, scenery_sopt.getCityid());
+				pstmt.setString(4, scenery_sopt.getCityname());
+				pstmt.setString(5, scenery_sopt.getImageurl());
+				pstmt.setInt(6, scenery_sopt.getOrdernumber());
+				pstmt.setInt(7, scenery_sopt.getTouristnumber());
+				pstmt.setString(8, scenery_sopt.getSenaryname());
+				pstmt.setFloat(9, scenery_sopt.getScore());
+				pstmt.setInt(10, scenery_sopt.getDate());
 				pstmt.executeUpdate();
 		} catch (SQLException e) {
 			status = false;
@@ -46,42 +53,41 @@ public class SceneryDao {
 			e.printStackTrace();
 		}finally {
 			releaseConnect(connect, pstmt, rs);
-			
 		}
 		return status;
 	}
 	
 	/***
-	 * 获取导游评论列表
+	 * 通过城市id查景点
 	 * @return
 	 */
-	public ArrayList<Message> getAllMessageByTouristId (String identify) {
+	public ArrayList<Scenery_sopt> getAllScenneryByCityId (int cityid) {
 		Connection connect = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-		ArrayList<Message> messageList = null;
+		ArrayList<Scenery_sopt> scenery_soptlist = null;
 		
 		connect = createConnect();
-		messageList = new ArrayList<Message>();
-		String sql = "select * from scenery_spot where touristid = "+identify;
+		scenery_soptlist = new ArrayList<Scenery_sopt>();
+		String sql = "select * from scenery_spot where cityid = "+cityid;
 		System.out.println(sql);
 		try {
 			pstmt = connect.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				Message message = new Message();
-//				identify,userid, touristid, content, replycontent,  commentdate , replaydate
-				message.setIdentify(rs.getInt("identify"));
-				message.setUserid(rs.getString("userid"));
-				message.setTouristid(rs.getString("touristid"));
-				message.setContent(rs.getString("content"));
-				message.setReplycontent(rs.getString("replycontent"));
-				message.setCommentdate(rs.getInt("commentdate"));
-				message.setReplaydate(rs.getInt("replydate"));
-				message.setPhonenumber(rs.getString("phonenumber"));
-				messageList.add(message);
-//				System.out.println(touristList);
+				Scenery_sopt scenery_sopt = new Scenery_sopt();
+				scenery_sopt.setIdentify(rs.getInt("identify"));
+				scenery_sopt.setSenaryname(rs.getString("senaryname"));
+				scenery_sopt.setCityid(rs.getInt("cityid"));
+				scenery_sopt.setCityname(rs.getString("cityname"));
+				scenery_sopt.setImageurl(rs.getString("imageurl"));
+				scenery_sopt.setOrdernumber(rs.getInt("ordernumber"));
+				scenery_sopt.setTouristnumber(rs.getInt("touristnumber"));
+				scenery_sopt.setScenerynumber(rs.getInt("scenerynumber"));
+				scenery_sopt.setScore(rs.getInt("score"));
+				scenery_sopt.setDate(rs.getInt("date"));
+				scenery_soptlist.add(scenery_sopt);
 			}		
 		} catch (Exception e) {
 			System.out.println("Erro ao listar todos os anser: " + e);
@@ -89,39 +95,40 @@ public class SceneryDao {
 		} finally {
 			releaseConnect(connect, pstmt, rs);
 		}
-		return messageList;
+		return scenery_soptlist;
 	}
 	
 	/***
-	 * 获取用户评论列表
+	 * 通过城市名称查景点
 	 * @return
 	 */
-	public ArrayList<Message> getAllMessageByUserId (String userId) {
+	public ArrayList<Scenery_sopt> getAllScenneryByCityName (String cityname) {
 		Connection connect = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-		ArrayList<Message> messageList = null;
+		ArrayList<Scenery_sopt> scenery_soptlist = null;
 		
 		connect = createConnect();
-		messageList = new ArrayList<Message>();
-		String sql = "select * from scenery_spot where userid = "+userId;
+		scenery_soptlist = new ArrayList<Scenery_sopt>();
+		String sql = "select * from scenery_spot where cityname like " + "\'%"+cityname+"%\'";
 		System.out.println(sql);
 		try {
 			pstmt = connect.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				Message tourist = new Message();
-//				identify,userid, touristid, content, replycontent,  commentdate , replaydate
-				tourist.setIdentify(rs.getInt("identify"));
-				tourist.setUserid(rs.getString("userid"));
-				tourist.setTouristid(rs.getString("touristid"));
-				tourist.setContent(rs.getString("content"));
-				tourist.setReplycontent(rs.getString("replycontent"));
-				tourist.setCommentdate(rs.getInt("commentdate"));
-				tourist.setReplaydate(rs.getInt("replydate"));
-				messageList.add(tourist);
-//				System.out.println(touristList);
+				Scenery_sopt scenery_sopt = new Scenery_sopt();
+				scenery_sopt.setIdentify(rs.getInt("identify"));
+				scenery_sopt.setSenaryname(rs.getString("senaryname"));
+				scenery_sopt.setCityid(rs.getInt("cityid"));
+				scenery_sopt.setCityname(rs.getString("cityname"));
+				scenery_sopt.setImageurl(rs.getString("imageurl"));
+				scenery_sopt.setOrdernumber(rs.getInt("ordernumber"));
+				scenery_sopt.setTouristnumber(rs.getInt("touristnumber"));
+				scenery_sopt.setScenerynumber(rs.getInt("scenerynumber"));
+				scenery_sopt.setScore(rs.getInt("score"));
+				scenery_sopt.setDate(rs.getInt("date"));
+				scenery_soptlist.add(scenery_sopt);
 			}		
 		} catch (Exception e) {
 			System.out.println("Erro ao listar todos os anser: " + e);
@@ -129,37 +136,88 @@ public class SceneryDao {
 		} finally {
 			releaseConnect(connect, pstmt, rs);
 		}
-		return messageList;
+		return scenery_soptlist;
 	}
-	
 	/***
-	 * 导游回复评论	
-	 * @param tourist
+	 * 通过景点名称查景点
 	 * @return
 	 */
-		public Boolean updateMessageByTourist(Message message) {
-			Boolean status = true;
-			Connection connect = null;
-			String sql = "update scenery_spot set userid = ?,touristid = ?,replycontent = ? ,replydate = ? where identify = ?";
-			PreparedStatement pstmt = null;
-			System.out.print(sql);
-			connect = createConnect();
-			ResultSet rs = null;
-			try {
-				pstmt = connect.prepareStatement(sql);
-				pstmt.setString(1, message.getUserid());
-				pstmt.setString(2, message.getTouristid());
-				pstmt.setString(3, message.getReplycontent());
-				pstmt.setInt(4, message.getReplaydate());
-				pstmt.setInt(5, message.getIdentify());
-				pstmt.executeUpdate();
-			} catch (SQLException e) {
-				status = false;
-				System.out.print(e);
-				e.printStackTrace();
-			}finally {
-				releaseConnect(connect, pstmt, rs);
-			}
-			return status;
+	public ArrayList<Scenery_sopt> getAllScenneryBySceneryName (String senaryname) {
+		Connection connect = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Scenery_sopt> scenery_soptlist = null;
+		
+		connect = createConnect();
+		scenery_soptlist = new ArrayList<Scenery_sopt>();
+		String sql = "select * from scenery_spot where senaryname like "+ "\'%" +senaryname+"%\'";
+		System.out.println(sql);
+		try {
+			pstmt = connect.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Scenery_sopt scenery_sopt = new Scenery_sopt();
+				scenery_sopt.setIdentify(rs.getInt("identify"));
+				scenery_sopt.setSenaryname(rs.getString("senaryname"));
+				scenery_sopt.setCityid(rs.getInt("cityid"));
+				scenery_sopt.setCityname(rs.getString("cityname"));
+				scenery_sopt.setImageurl(rs.getString("imageurl"));
+				scenery_sopt.setOrdernumber(rs.getInt("ordernumber"));
+				scenery_sopt.setTouristnumber(rs.getInt("touristnumber"));
+				scenery_sopt.setScenerynumber(rs.getInt("scenerynumber"));
+				scenery_sopt.setScore(rs.getInt("score"));
+				scenery_sopt.setDate(rs.getInt("date"));
+				scenery_soptlist.add(scenery_sopt);
+			}		
+		} catch (Exception e) {
+			System.out.println("Erro ao listar todos os anser: " + e);
+			e.printStackTrace();
+		} finally {
+			releaseConnect(connect, pstmt, rs);
 		}
+		return scenery_soptlist;
+	}	
+	/***
+	 * 获取热门景点
+	 * 按照ordernumber倒序排列，ordernumber越大越排前面
+	 * @return
+	 */
+	public ArrayList<Scenery_sopt> getHotScenneryWithNumber (int number) {
+		Connection connect = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Scenery_sopt> scenery_soptlist = null;
+		
+		connect = createConnect();
+		scenery_soptlist = new ArrayList<Scenery_sopt>();
+		String sql = "select * from scenery_spot order by ordernumber desc limit "+number;
+		System.out.println(sql);
+		try {
+			pstmt = connect.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Scenery_sopt scenery_sopt = new Scenery_sopt();
+				scenery_sopt.setIdentify(rs.getInt("identify"));
+				scenery_sopt.setSenaryname(rs.getString("senaryname"));
+				scenery_sopt.setCityid(rs.getInt("cityid"));
+				scenery_sopt.setCityname(rs.getString("cityname"));
+				scenery_sopt.setImageurl(rs.getString("imageurl"));
+				scenery_sopt.setOrdernumber(rs.getInt("ordernumber"));
+				scenery_sopt.setTouristnumber(rs.getInt("touristnumber"));
+				scenery_sopt.setScenerynumber(rs.getInt("scenerynumber"));
+				scenery_sopt.setScore(rs.getInt("score"));
+				scenery_sopt.setDate(rs.getInt("date"));
+				scenery_soptlist.add(scenery_sopt);
+			}		
+		} catch (Exception e) {
+			System.out.println("Erro ao listar todos os anser: " + e);
+			e.printStackTrace();
+		} finally {
+			releaseConnect(connect, pstmt, rs);
+		}
+		return scenery_soptlist;
+	}
+
 }
